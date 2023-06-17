@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Room Count by Category</h1>
+    <form method="POST" action="{% url 'room_count_by_category_submit' %}">
+        {% csrf_token %}
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date">
+        <input type="submit" value="Submit">
+    </form>
+    <table>
+        <tr>
+            <th>Category</th>
+            <th>Count</th>
+        </tr>
+    </table>
+        {% for room in rooms %}
+            <p> {{ room.category }}, {{ room.count }}</p>
+        {% endfor %}
+    
+{% endblock %}

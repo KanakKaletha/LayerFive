@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Room Count by Category Range</h1>
+    <form method="POST" action="{% url 'room_count_by_category_range_submit' %}">
+        {% csrf_token %}
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date">
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" name="end_date">
+
+        <label for="category">Category:</label>
+        <select id="category" name="category">
+            {% for category in Room.ROOM_CATEGORIES %}
+                <option value="{{ category.0 }}">{{ category.1 }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="submit" value="Submit">
+    </form>
+    <p>Rooms available: {{ rooms }}</p>
+
+    
+{% endblock %}
